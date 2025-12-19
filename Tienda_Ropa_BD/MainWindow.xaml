@@ -1,0 +1,47 @@
+<Window x:Class="TiendaRopaPOS.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Sistema POS - Tienda de Ropa" Height="800" Width="1400"
+        Background="{StaticResource BackgroundColor}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Header -->
+        <Border Grid.Row="0" Background="{StaticResource PrimaryColor}" Padding="20,15">
+            <TextBlock Text="SISTEMA DE PUNTO DE VENTA - TIENDA DE ROPA" 
+                      FontSize="24" FontWeight="Bold" 
+                      Foreground="White" HorizontalAlignment="Center"/>
+        </Border>
+        
+        <!-- Navigation and Content -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Sidebar Navigation -->
+            <Border Grid.Column="0" Background="White" BorderBrush="#BDC3C7" BorderThickness="0,0,1,0">
+                <StackPanel Margin="10">
+                    <Button Content="👥 Clientes" Style="{StaticResource PrimaryButton}" 
+                           Click="BtnClientes_Click" Margin="0,5" Height="50"/>
+                    <Button Content="📦 Inventario" Style="{StaticResource PrimaryButton}" 
+                           Click="BtnInventario_Click" Margin="0,5" Height="50"/>
+                    <Button Content="🛒 Ventas (POS)" Style="{StaticResource SuccessButton}" 
+                           Click="BtnVentas_Click" Margin="0,5" Height="50"/>
+                    <Button Content="📋 Historial" Style="{StaticResource PrimaryButton}" 
+                           Click="BtnHistorial_Click" Margin="0,5" Height="50"/>
+                    <Button Content="🎁 Promociones" Style="{StaticResource PrimaryButton}" 
+                           Click="BtnPromociones_Click" Margin="0,5" Height="50"/>
+                </StackPanel>
+            </Border>
+            
+            <!-- Content Area -->
+            <ContentControl x:Name="ContentArea" Grid.Column="1" Margin="20"/>
+        </Grid>
+    </Grid>
+</Window>
+

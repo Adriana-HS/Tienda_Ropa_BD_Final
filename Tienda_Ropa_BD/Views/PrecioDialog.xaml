@@ -1,0 +1,42 @@
+<Window x:Class="TiendaRopaPOS.Views.PrecioDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Editar Precios" Height="250" Width="350"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="CanResize"
+        MinHeight="250" MinWidth="350">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" Text="Editar Precios del Producto" 
+                  FontSize="16" FontWeight="Bold" Margin="0,0,0,20"/>
+        
+        <TextBlock x:Name="TxtProductoNombre" Grid.Row="1" 
+                  FontSize="14" Margin="0,0,0,15"/>
+        
+        <TextBlock Grid.Row="2" Text="Precio Base:" Margin="0,0,0,5"/>
+        <TextBox x:Name="TxtPrecioBase" Grid.Row="3" 
+                Style="{StaticResource ModernTextBox}" Margin="0,0,0,15"/>
+        
+        <TextBlock Grid.Row="4" Text="Precio Venta:" Margin="0,0,0,5"/>
+        <TextBox x:Name="TxtPrecioVenta" Grid.Row="5" 
+                Style="{StaticResource ModernTextBox}" Margin="0,0,0,20"/>
+        
+        <StackPanel Grid.Row="6" Orientation="Horizontal" 
+                   HorizontalAlignment="Right">
+            <Button Content="Guardar" Style="{StaticResource SuccessButton}" 
+                   Click="BtnGuardar_Click" Width="100" Margin="0,0,10,0"/>
+            <Button Content="Cancelar" Style="{StaticResource DangerButton}" 
+                   Click="BtnCancelar_Click" Width="100"/>
+        </StackPanel>
+    </Grid>
+</Window>
+

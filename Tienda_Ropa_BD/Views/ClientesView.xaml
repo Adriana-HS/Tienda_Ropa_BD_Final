@@ -1,0 +1,60 @@
+<UserControl x:Class="TiendaRopaPOS.Views.ClientesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Title -->
+        <TextBlock Grid.Row="0" Text="MÓDULO DE CLIENTES" 
+                  FontSize="20" FontWeight="Bold" 
+                  Margin="0,0,0,20"/>
+        
+        <!-- Search and Actions -->
+        <Grid Grid.Row="1" Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBox x:Name="TxtBusqueda" Grid.Column="0" 
+                    Style="{StaticResource ModernTextBox}"
+                    TextChanged="TxtBusqueda_TextChanged"
+                    Margin="0,0,10,0">
+                <TextBox.ToolTip>
+                    <TextBlock Text="Buscar por nombre o apellido"/>
+                </TextBox.ToolTip>
+            </TextBox>
+            
+            <Button x:Name="BtnNuevoCliente" Content="➕ Nuevo Cliente" 
+                   Style="{StaticResource SuccessButton}"
+                   Click="BtnNuevoCliente_Click" 
+                   Grid.Column="1" Margin="0,0,10,0" Width="150"/>
+            
+            <Button x:Name="BtnBuscarDetalle" Content="🔍 Buscar por ID/Email" 
+                   Style="{StaticResource PrimaryButton}"
+                   Click="BtnBuscarDetalle_Click" 
+                   Grid.Column="2" Width="180"/>
+        </Grid>
+        
+        <!-- DataGrid -->
+        <DataGrid x:Name="DgClientes" Grid.Row="2" 
+                 Style="{StaticResource ModernDataGrid}"
+                 SelectionChanged="DgClientes_SelectionChanged"
+                 MouseDoubleClick="DgClientes_MouseDoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding IdCliente}" Width="60"/>
+                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="150"/>
+                <DataGridTextColumn Header="Apellido" Binding="{Binding Apellido}" Width="150"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="200"/>
+                <DataGridTextColumn Header="Teléfono" Binding="{Binding Telefono}" Width="120"/>
+                <DataGridTextColumn Header="Fecha Registro" Binding="{Binding FechaRegistro, StringFormat=dd/MM/yyyy}" Width="120"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
+

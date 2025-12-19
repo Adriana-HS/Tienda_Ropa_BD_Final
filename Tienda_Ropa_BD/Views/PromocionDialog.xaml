@@ -1,0 +1,65 @@
+<Window x:Class="TiendaRopaPOS.Views.PromocionDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Crear Promoción" Height="500" Width="450"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="CanResize"
+        MinHeight="450" MinWidth="450">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" Text="Nueva Promoción" 
+                  FontSize="18" FontWeight="Bold" Margin="0,0,0,20"/>
+        
+        <TextBlock Grid.Row="1" Text="Nombre:" Margin="0,0,0,5"/>
+        <TextBox x:Name="TxtNombre" Grid.Row="2" 
+                Style="{StaticResource ModernTextBox}" Margin="0,0,0,15"/>
+        
+        <TextBlock Grid.Row="3" Text="Descripción:" Margin="0,0,0,5"/>
+        <TextBox x:Name="TxtDescripcion" Grid.Row="4" 
+                Style="{StaticResource ModernTextBox}" 
+                TextWrapping="Wrap" AcceptsReturn="True" 
+                Height="60" Margin="0,0,0,15"/>
+        
+        <TextBlock Grid.Row="5" Text="Tipo de Descuento:" FontWeight="Bold" Margin="0,0,0,10"/>
+        <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="0,0,0,15">
+            <RadioButton x:Name="RbPorcentaje" Content="Porcentaje (%)" 
+                        IsChecked="True" Margin="0,0,20,0" Checked="RbPorcentaje_Checked"/>
+            <RadioButton x:Name="RbMonto" Content="Monto Fijo ($)" 
+                        Checked="RbMonto_Checked"/>
+        </StackPanel>
+        
+        <TextBlock x:Name="TxtLabelValor" Grid.Row="7" Text="Valor Porcentaje:" Margin="0,0,0,5"/>
+        <TextBox x:Name="TxtValor" Grid.Row="8" 
+                Style="{StaticResource ModernTextBox}" Margin="0,0,0,15"/>
+        
+        <TextBlock Grid.Row="9" Text="Fecha Inicio:" Margin="0,0,0,5"/>
+        <DatePicker x:Name="DpFechaInicio" Grid.Row="10" Margin="0,0,0,15"/>
+        
+        <TextBlock Grid.Row="11" Text="Fecha Fin:" Margin="0,0,0,5"/>
+        <DatePicker x:Name="DpFechaFin" Grid.Row="12" Margin="0,0,0,20"/>
+        
+        <StackPanel Grid.Row="13" Orientation="Horizontal" 
+                   HorizontalAlignment="Right">
+            <Button Content="Guardar" Style="{StaticResource SuccessButton}" 
+                   Click="BtnGuardar_Click" Width="100" Margin="0,0,10,0"/>
+            <Button Content="Cancelar" Style="{StaticResource DangerButton}" 
+                   Click="BtnCancelar_Click" Width="100"/>
+        </StackPanel>
+    </Grid>
+</Window>
+

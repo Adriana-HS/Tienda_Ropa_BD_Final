@@ -1,0 +1,184 @@
+<UserControl x:Class="TiendaRopaPOS.Views.VentasView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock Text="MÓDULO DE VENTAS (POS)" 
+                      FontSize="20" FontWeight="Bold" Margin="0,0,0,5"/>
+            <TextBlock Text="Paso 1: Seleccione un cliente → Paso 2: Clic en 'Nuevo Pedido' → Paso 3: Agregue productos (doble clic o botón) → Paso 4: Finalice la venta" 
+                      FontSize="11" Foreground="#7F8C8D" TextWrapping="Wrap"/>
+        </StackPanel>
+        
+        <!-- Cliente Selection -->
+        <Grid Grid.Row="1" Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.Column="0" Text="Cliente:" 
+                      VerticalAlignment="Center" Margin="0,0,10,0"/>
+            
+            <ComboBox x:Name="CmbClientes" Grid.Column="1" 
+                     DisplayMemberPath="NombreCompleto"
+                     SelectionChanged="CmbClientes_SelectionChanged"
+                     Margin="0,0,10,0"/>
+            
+            <StackPanel Grid.Column="2" Orientation="Horizontal">
+                <Button x:Name="BtnNuevoPedido" Content="🛒 Nuevo Pedido" 
+                       Style="{StaticResource SuccessButton}"
+                       Click="BtnNuevoPedido_Click" 
+                       Width="150" IsEnabled="False" Margin="0,0,10,0"/>
+                <Button x:Name="BtnCancelarPedido" Content="❌ Cancelar Pedido" 
+                       Style="{StaticResource DangerButton}"
+                       Click="BtnCancelarPedido_Click" 
+                       Width="150" IsEnabled="False"/>
+            </StackPanel>
+        </Grid>
+        
+        <!-- Split View: Productos y Carrito -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Productos Disponibles -->
+            <Border Grid.Column="0" BorderBrush="#BDC3C7" BorderThickness="1" 
+                   Margin="0,0,10,0" Padding="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Grid.Row="0" Text="Productos Disponibles" 
+                              FontWeight="Bold" Margin="0,0,0,10"/>
+                    
+                    <DataGrid x:Name="DgProductos" Grid.Row="1" 
+                             Style="{StaticResource ModernDataGrid}"
+                             SelectionMode="Single" IsReadOnly="True"
+                             MouseDoubleClick="DgProductos_MouseDoubleClick">
+                        <DataGrid.Columns>
+                        <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*"/>
+                        <DataGridTextColumn Header="Color" Binding="{Binding Color}" Width="70"/>
+                        <DataGridTextColumn Header="Talla" Binding="{Binding Talla}" Width="50"/>
+                        <DataGridTextColumn Header="Precio" Binding="{Binding PrecioVenta, StringFormat=C2}" Width="80"/>
+                        <DataGridTextColumn Header="Stock" Binding="{Binding StockActual}" Width="60"/>
+                    </DataGrid.Columns>
+                    </DataGrid>
+                    
+                    <Grid Grid.Row="2" Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBlock Grid.Column="0" Text="Cantidad:" 
+                                  VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <TextBox x:Name="TxtCantidad" Grid.Column="1" 
+                                Text="1" Style="{StaticResource ModernTextBox}" 
+                                Margin="0,0,10,0"/>
+                        <Button x:Name="BtnAgregar" Content="➕ Agregar" 
+                               Style="{StaticResource SuccessButton}"
+                               Click="BtnAgregar_Click" 
+                               Grid.Column="2" Width="100" IsEnabled="False"/>
+                    </Grid>
+                </Grid>
+            </Border>
+            
+            <!-- Carrito -->
+            <Border Grid.Column="1" BorderBrush="#BDC3C7" BorderThickness="1" 
+                   Padding="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Grid.Row="0" Text="Carrito de Compra" 
+                              FontWeight="Bold" Margin="0,0,0,10"/>
+                    
+                    <DataGrid x:Name="DgCarrito" Grid.Row="1" 
+                             Style="{StaticResource ModernDataGrid}"
+                             SelectionChanged="DgCarrito_SelectionChanged"
+                             CellEditEnding="DgCarrito_CellEditEnding"
+                             CanUserAddRows="False"
+                             CanUserDeleteRows="False">
+                       <DataGrid.Columns>
+                        <DataGridTextColumn Header="Producto" Binding="{Binding NombreProducto}" Width="*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Color" Binding="{Binding Color}" Width="70" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Talla" Binding="{Binding Talla}" Width="50" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Cant." Binding="{Binding Cantidad}" Width="60" IsReadOnly="False">
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Precio" Binding="{Binding PrecioUnitario, StringFormat=C2}" Width="80" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Desc." Binding="{Binding Descuento, StringFormat=C2}" Width="70" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Subtotal" Binding="{Binding Subtotal, StringFormat=C2}" Width="90" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                    </DataGrid>
+                    
+                    <!-- Totales -->
+                    <Border Grid.Row="2" BorderBrush="#BDC3C7" BorderThickness="0,1,0,0" 
+                           Padding="0,10,0,0" Margin="0,10,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Subtotal:" 
+                                      FontWeight="Bold"/>
+                            <TextBlock x:Name="TxtSubtotal" Grid.Row="0" Grid.Column="1" 
+                                      FontWeight="Bold" Margin="10,0,0,5"/>
+                            
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Descuento Total:" 
+                                      FontWeight="Bold"/>
+                            <TextBlock x:Name="TxtDescuento" Grid.Row="1" Grid.Column="1" 
+                                      FontWeight="Bold" Margin="10,0,0,5"/>
+                            
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="TOTAL:" 
+                                      FontSize="16" FontWeight="Bold"/>
+                            <TextBlock x:Name="TxtTotal" Grid.Row="2" Grid.Column="1" 
+                                      FontSize="16" FontWeight="Bold" Margin="10,0,0,10"/>
+                            
+                            <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" Margin="0,5,0,0">
+                                <Button x:Name="BtnEliminarItem" Content="🗑️ Eliminar Item" 
+                                       Style="{StaticResource DangerButton}"
+                                       Click="BtnEliminarItem_Click" 
+                                       Width="130" IsEnabled="False" Margin="0,0,10,0"/>
+                                <Button x:Name="BtnActualizarEstado" Content="🔄 Actualizar Estado" 
+                                       Style="{StaticResource PrimaryButton}"
+                                       Click="BtnActualizarEstado_Click" 
+                                       Width="150" IsEnabled="False"/>
+                            </StackPanel>
+                            
+                            <Button x:Name="BtnFinalizarVenta" Content="✅ Finalizar Venta" 
+                                   Style="{StaticResource SuccessButton}"
+                                   Click="BtnFinalizarVenta_Click" 
+                                   Grid.Row="3" Grid.Column="1" 
+                                   Width="150" IsEnabled="False" Margin="0,5,0,0"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
+

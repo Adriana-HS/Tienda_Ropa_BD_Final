@@ -1,0 +1,55 @@
+<UserControl x:Class="TiendaRopaPOS.Views.PromocionesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" Text="MÓDULO DE PROMOCIONES" 
+                  FontSize="20" FontWeight="Bold" Margin="0,0,0,20"/>
+        
+        <!-- Action Buttons -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,20">
+            <Button x:Name="BtnCrearPromocion" Content="➕ Crear Promoción" 
+                   Style="{StaticResource SuccessButton}"
+                   Click="BtnCrearPromocion_Click" 
+                   Margin="0,0,10,0" Width="150"/>
+            <Button x:Name="BtnAsignarPromocion" Content="🔗 Asignar Promoción" 
+                   Style="{StaticResource PrimaryButton}"
+                   Click="BtnAsignarPromocion_Click" 
+                   Margin="0,0,10,0" Width="180" IsEnabled="True"/>
+            <Button x:Name="BtnDesactivarPromocion" Content="❌ Desactivar Promoción" 
+                   Style="{StaticResource DangerButton}"
+                   Click="BtnDesactivarPromocion_Click" 
+                   Width="200" IsEnabled="True"/>
+        </StackPanel>
+        
+        <Border Grid.Row="2" BorderBrush="#BDC3C7" BorderThickness="1" 
+               Padding="10" Background="White">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock x:Name="TxtPromocionesInfo" Grid.Row="0"
+                           Text="Promociones activas" FontWeight="Bold" Margin="0,0,0,10"/>
+
+                <DataGrid x:Name="DgPromociones" Grid.Row="1"
+                         Style="{StaticResource ModernDataGrid}"
+                         IsReadOnly="True"
+                         CanUserAddRows="False" CanUserDeleteRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding IdPromocion}" Width="80"/>
+                        <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*"/>
+                        <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="120"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
+

@@ -1,0 +1,65 @@
+<Window x:Class="TiendaRopaPOS.Views.AsignarPromocionDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Asignar Promoción" Height="420" Width="400"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="CanResize"
+        MinHeight="380" MinWidth="400">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" Text="Asignar Promoción" 
+                  FontSize="18" FontWeight="Bold" Margin="0,0,0,20"/>
+        
+        <TextBlock Grid.Row="1" Text="ID Promoción:" Margin="0,0,0,5"/>
+        <Grid Grid.Row="2" Margin="0,0,0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="TxtIdPromocion" Grid.Column="0"
+                    Style="{StaticResource ModernTextBox}" Margin="0,0,10,0"/>
+            <Button x:Name="BtnSeleccionarPromocion" Grid.Column="1"
+                    Content="Seleccionar" Style="{StaticResource PrimaryButton}"
+                    Width="110" Click="BtnSeleccionarPromocion_Click"/>
+        </Grid>
+        
+        <TextBlock Grid.Row="3" Text="Asignar a:" FontWeight="Bold" Margin="0,0,0,10"/>
+        <StackPanel Grid.Row="4" Margin="0,0,0,15">
+            <RadioButton x:Name="RbProducto" Content="Producto" 
+                        IsChecked="True" Margin="0,0,0,5" Checked="RbProducto_Checked"/>
+            <RadioButton x:Name="RbCategoria" Content="Categoría" 
+                        Margin="0,0,0,5" Checked="RbCategoria_Checked"/>
+            <RadioButton x:Name="RbSubcategoria" Content="Subcategoría" 
+                        Checked="RbSubcategoria_Checked"/>
+        </StackPanel>
+        
+        <TextBlock x:Name="TxtLabelId" Grid.Row="5" Text="ID Producto:" Margin="0,0,0,5"/>
+        <TextBox x:Name="TxtId" Grid.Row="6" 
+                Style="{StaticResource ModernTextBox}" Margin="0,0,0,15"/>
+        
+        <TextBlock Grid.Row="7" Text="Monto Mínimo de Compra:" Margin="0,0,0,5"/>
+        <TextBox x:Name="TxtMontoMin" Grid.Row="8" 
+                Text="0" Style="{StaticResource ModernTextBox}" Margin="0,0,0,20"/>
+        
+        <StackPanel Grid.Row="9" Orientation="Horizontal" 
+                   HorizontalAlignment="Right">
+            <Button Content="Guardar" Style="{StaticResource SuccessButton}" 
+                   Click="BtnGuardar_Click" Width="100" Margin="0,0,10,0"/>
+            <Button Content="Cancelar" Style="{StaticResource DangerButton}" 
+                   Click="BtnCancelar_Click" Width="100"/>
+        </StackPanel>
+    </Grid>
+</Window>
+
